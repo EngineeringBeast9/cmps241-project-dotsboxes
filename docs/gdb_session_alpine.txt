@@ -1,0 +1,18 @@
+gdb -q -batch -ex 'break board_apply' -ex run -ex 'print *board' -ex backtrace -ex 'disable 1' -ex continue --args ./build/test_core
+Breakpoint 1 at 0x2dc0: file src/board.c, line 73.
+warning: opening /proc/self/mem file failed: No such file or directory (2)
+warning: opening /proc/PID/mem file for lwp 957.957 failed: No such file or directory (2)
+
+Breakpoint 1, board_apply (board=board@entry=0x7ffffffee0f0, move=...) at src/board.c:73
+73	    int edge = move_to_edge(move);
+$1 = {edges = 0, owner = {"     ", "     ", "     ", "     "}, score = {0, 0}, current = 0, lines_left = 49}
+#0  board_apply (board=board@entry=0x7ffffffee0f0, move=...) at src/board.c:73
+#1  0x000000000800135e in test_coordinates () at tests/test_core.c:41
+#2  main () at tests/test_core.c:213
+PASS coordinate mapping, bounds, reversed/duplicate moves, atomic rejection
+PASS single/double captures, both orientations, owner, score, extra turns
+PASS strict parsing, numeric overflow, quit/EOF, overlong-line recovery
+PASS 1000 randomized complete games, 49000 moves, A/B wins and ties
+PASS exact bot vs independent minimax (20 positions), bounded search, full game
+ALL CORE TESTS PASSED
+[Inferior 1 (process 957) exited normally]

@@ -1,0 +1,6 @@
+rm -f src/*.o dots_and_boxes build/test_board
+gcc -std=c99 -g -Wall -Wextra -Wpedantic -Werror -Iinclude -c src/main.c -o src/main.o
+gcc -std=c99 -g -Wall -Wextra -Wpedantic -Werror -Iinclude -c src/board.c -o src/board.o
+gcc -std=c99 -g -Wall -Wextra -Wpedantic -Werror -Iinclude -c src/display.c -o src/display.o
+gcc -std=c99 -g -Wall -Wextra -Wpedantic -Werror -Iinclude -c src/input.c -o src/input.o
+gcc -std=c99 -g -Wall -Wextra -Wpedantic -Werror -Iinclude -o dots_and_boxes src/main.o src/board.o src/display.o src/input.o

@@ -1,0 +1,5 @@
+mkdir -p build
+gcc -Wall -Wextra -std=c99 -g -Iinclude -o build/test_board tests/test_board.c src/board.c
+./build/test_board
+30188 checks, 0 failures
+ALL BOARD TESTS PASSED

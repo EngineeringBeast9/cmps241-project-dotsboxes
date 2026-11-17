@@ -1,27 +1,20 @@
 #include <stdio.h>
 #include "board.h"
-#include "game.h"
 #include "display.h"
 #include "input.h"
 
 static void run_game(void) {
     Board board;
-    init_board(&board);
+    board_init(&board);
 
-    char current_player = 'A';
     int r1, c1, r2, c2;
 
-    while (!is_game_over(&board)) {
+    while (!board_finished(&board)) {
         print_board(&board);
-        get_valid_move(&board, current_player, &r1, &c1, &r2, &c2);
-
-        int boxes_completed = make_move(&board, r1, c1, r2, c2, current_player);
+        if (!get_valid_move(&board, (char)('A' + board.current), &r1, &c1, &r2, &c2))
+            return;
+        board_apply(&board, (Move){r1, c1, r2, c2});
         print_scores(&board);
-
-        // Switch turns ONLY if no box was completed
-        if (boxes_completed == 0) {
-            current_player = (current_player == 'A') ? 'B' : 'A';
-        }
     }
 
     print_board(&board);
@@ -31,6 +24,7 @@ static void run_game(void) {
 int main(void) {
     while (1) {
         show_menu();
+        fflush(stdout);
         int choice = get_menu_choice();
 
         if (choice == 1) {
@@ -38,7 +32,7 @@ int main(void) {
         } else if (choice == 2) {
             printf("\nRules: Connect two adjacent dots by entering their row and column coordinates.\n");
             printf("Completing the 4th side of a box claims it with your initial and grants an extra turn!\n\n");
-        } else if (choice == 3) {
+        } else if (choice == 3 || choice == 0) {
             printf("Exiting Dots and Boxes. Goodbye!\n");
             break;
         }

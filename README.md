@@ -30,7 +30,7 @@ make clean
 ## Run
 
 ```bash
-./dots
+./dots_and_boxes
 ```
 
 Moves are entered as four integers, `r1 c1 r2 c2`, for example `0 4 0 3`. Dots are indexed by row (0–4) and column (0–5). Only horizontally or vertically adjacent dots may be connected.
@@ -40,13 +40,13 @@ Moves are entered as four integers, `r1 c1 r2 c2`, for example `0 4 0 3`. Dots a
 Memory check with Valgrind (the target is zero leaks and zero errors):
 
 ```bash
-make valgrind
+valgrind --leak-check=full ./dots_and_boxes
 ```
 
 Debug with GDB:
 
 ```bash
-gdb ./dots
+gdb ./dots_and_boxes
 ```
 
 Session logs are stored in `docs/`.

@@ -30,7 +30,7 @@ void print_board(const Board *b) {
         for (int c = 0; c < DOT_COLS; c++) {
             printf(".");
             if (c < BOX_COLS) {
-                printf("%c", b->h_lines[r][c] ? '-' : ' ');
+                printf("%c", board_has_edge(b, move_to_edge((Move){r, c, r, c + 1})) ? '-' : ' ');
             }
         }
         printf("\n");
@@ -39,9 +39,9 @@ void print_board(const Board *b) {
         if (r < BOX_ROWS) {
             printf("  ");
             for (int c = 0; c < DOT_COLS; c++) {
-                printf("%c", b->v_lines[r][c] ? '|' : ' ');
+                printf("%c", board_has_edge(b, move_to_edge((Move){r, c, r + 1, c})) ? '|' : ' ');
                 if (c < BOX_COLS) {
-                    printf("%c", b->boxes[r][c]);
+                    printf("%c", b->owner[r][c]);
                 }
             }
             printf("\n");
@@ -51,19 +51,19 @@ void print_board(const Board *b) {
 
 void print_scores(const Board *b) {
     print_divider();
-    printf("Player A score: %d\n", b->score_a);
-    printf("Player B score: %d\n", b->score_b);
+    printf("Player A score: %d\n", b->score[0]);
+    printf("Player B score: %d\n", b->score[1]);
 }
 
 void print_winner(const Board *b) {
     print_scores(b);
     print_divider();
-    if (b->score_a > b->score_b) {
-        printf("Game Over! Player A wins (%d to %d)!\n", b->score_a, b->score_b);
-    } else if (b->score_b > b->score_a) {
-        printf("Game Over! Player B wins (%d to %d)!\n", b->score_b, b->score_a);
+    if (b->score[0] > b->score[1]) {
+        printf("Game Over! Player A wins (%d to %d)!\n", b->score[0], b->score[1]);
+    } else if (b->score[1] > b->score[0]) {
+        printf("Game Over! Player B wins (%d to %d)!\n", b->score[1], b->score[0]);
     } else {
-        printf("Game Over! It's a tie (%d to %d)!\n", b->score_a, b->score_b);
+        printf("Game Over! It's a tie (%d to %d)!\n", b->score[0], b->score[1]);
     }
     print_divider();
 }

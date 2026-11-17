@@ -12,7 +12,17 @@ $(TARGET): $(OBJ)
 src/%.o: src/%.c $(wildcard include/*.h)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-clean:
-	rm -f src/*.o $(TARGET)
+build/test_board: tests/test_board.c src/board.c include/board.h
+	mkdir -p build
+	$(CC) $(CFLAGS) -o $@ tests/test_board.c src/board.c
 
-.PHONY: all clean
+test: build/test_board
+	./build/test_board
+
+valgrind: build/test_board
+	valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 ./build/test_board
+
+clean:
+	rm -f src/*.o $(TARGET) build/test_board
+
+.PHONY: all clean test valgrind

@@ -65,7 +65,7 @@ Session logs are stored in `docs/`.
 
 ## Alpine VM Autostart
 
-The game launches automatically when the VM boots, with no login prompt. Setup steps are documented in [`vm/autostart.md`](vm/autostart.md).
+Follow the [Alpine verification and autostart guide](vm/autostart.md) to run the Sprint 1 checks and verify that the VM boots directly into the game.
 
 ## Project Plan
 

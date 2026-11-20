@@ -1,6 +1,6 @@
 # Dots and Boxes
 
-A command-line implementation of the classic Dots and Boxes game, written in C (C99) for Alpine Linux. Developed as the CMPS 241 (Software Construction) course project.
+A command-line implementation of the classic Dots and Boxes game, written in C (C99) for Alpine Linux. Developed as the CMPS 241 (Systems Programming/Engineering) course project.
 
 ## Features
 
@@ -78,4 +78,4 @@ The full sprint schedule, architecture, and task breakdown are in [`plan.md`](pl
 
 ## Course
 
-CMPS 241, Software Construction, Fall 2026/27
+CMPS 241, Systems Programming/Engineering, Fall 2026/27
